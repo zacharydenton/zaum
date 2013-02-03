@@ -1,0 +1,21 @@
+<template name="cards">
+<div class="container">
+  <div class="row">
+    <div class="span12">
+      <h2 class="section_header"><hr class="left visible-desktop"><span>{{ deck.title }}</span><hr class="right visible-desktop"></h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span12">
+      <div class="card">
+        <div class="front">
+          {{ card.front }}
+        </div>
+        <div class="back">
+          {{ card.back.en }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</template>
