@@ -9,6 +9,15 @@
     <div class="span3">
     </div>
     <div class="span6">
+      {{#if finished}}
+      <div class="span3">
+        <h3>Stats</h3>
+        <hr class="bright" />
+        {{good}}
+        {{okay}}
+        {{bad}}
+      </div>
+      {{else}}
       <div class="card">
         <div class="front">
           {{ card.front }}
@@ -25,8 +34,9 @@
       </div>
       <hr class="bright" />
       <div class="cardControls">
-        <a href="#" class="btn btn-success">Finished</a>
+        <a href="#" class="finished btn btn-success">Finished</a>
       </div>
+      {{/if}}
     </div>
     <div class="span3">
     </div>

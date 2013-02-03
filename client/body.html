@@ -18,6 +18,7 @@
         <div class="nav-collapse collapse">
           <ul class="nav pull-right">
             {{#if currentUser}}
+            <li><a href="/decks">Decks</a></li>
             <li>
             {{> signout}}
             </li>
@@ -41,10 +42,9 @@
   <!-- starts footer -->
   <div id="footer">
     <div class="container">
-      <hr>
-      <div class="row copyright">
-        <div class="span2 pull-right copy">
-          <p>Built by <a href="http://zacharydenton.com">Zach Denton</a></p>
+      <div class="row">
+        <div class="pull-right by">
+          Built by <a href="http://zacharydenton.com">Zach Denton</a>
         </div>
       </div>
     </div>

@@ -95,6 +95,9 @@ Template.cards.bad = ->
     quality: $lt: 3
   Math.round(bad.count() / Template.cards.total() * 100)
 
+Template.cards.finished = ->
+  false
+
 Template.cards.events
   'click .card': (e) ->
     e.preventDefault()
@@ -102,4 +105,7 @@ Template.cards.events
       chooseNext()
     else
       flipCard()
+  'click .finished': (e) ->
+    e.preventDefault()
+    Session.set 'finished', true
 

@@ -32,16 +32,6 @@ select {
   margin: 0;
 }
 
-.deck {
-  float: left;
-  margin-right: 48px;
-
-  span {
-    font-size: 48px;
-    font-weight: bolder;
-  }
-}
-
 .card {
   padding: 80px 40px;
 	background-color: #fbfbfb;
@@ -75,3 +65,57 @@ hr.bright {
   border-top: 1px solid #bec0c3;
 }
 
+.feature img {
+  width: 299px;
+  height: 218px;
+  background-color: white;
+}
+
+#footer {
+  min-height: 0 !important;
+  padding: 0 !important;
+
+  .by {
+    margin: 30px 0;
+  }
+}
+
+.deck {
+  margin-right: 15px;
+  margin-bottom: 15px;
+  float: left;
+	background-color: #fbfbfb;
+	border: 1px solid #d8d8d8;
+	-webkit-box-shadow: rgba(0,0,0,0.06) 0 0 10px;
+	-moz-box-shadow: rgba(0,0,0,0.06) 0 0 10px;
+	box-shadow: rgba(0,0,0,0.06) 0 0 10px;
+  text-align: center;
+  font-weight: bolder;
+  cursor: pointer;
+
+  &:hover {
+    -webkit-box-shadow: rgba(100,255,0,0.26) 0 0 10px;
+    -moz-box-shadow: rgba(100,255,0,0.26) 0 0 10px;
+    box-shadow: rgba(100,255,0,0.26) 0 0 10px;
+  }
+
+  .title {
+    font-size: 64px;
+    padding: 15px 60px;
+    line-height: 64px;
+    height: 72px;
+  }
+
+  .count {
+    font-size: 18px;
+    text-align: right;
+    font-weight: normal;
+    padding: 8px 14px;
+    margin: 0;
+    background-color: #f7f7f7;
+    border-top: 1px solid #ebebeb;
+    -webkit-border-radius: 5px 5px 0 0;
+    -moz-border-radius: 5px 5px 0 0;
+    border-radius: 5px 5px 0 0;
+  }
+}
