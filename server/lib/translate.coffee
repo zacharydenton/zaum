@@ -21,7 +21,7 @@ Meteor.methods
       'User-Agent': 'Mozilla/5.0'
     
     data = Meteor.http.get("https://translate.google.com/translate_a/t", params: params, headers: headers).content
-    if data.length > 4 and data[0] == '['
+    if data and data.length > 4 and data[0] == '['
       parsed = eval(data)
       parsed = parsed[0] and parsed[0][0] and parsed[0][0][0]
       return parsed
