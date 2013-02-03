@@ -1,8 +1,10 @@
 chooseNext = ->
-  Session.set 'flipped', false
-  Session.set 'currentSchedule', Schedules.findOne(date: $lt: Math.round(Date.now() / 1000))._id
-  Session.set 'showTime', Date.now()
-
+  schedule = Schedules.findOne(date: $lt: Math.round(Date.now() / 1000))
+  if schedule
+    Session.set 'flipped', false
+    Session.set 'currentSchedule', schedule._id
+    Session.set 'showTime', Date.now()
+  
 flipCard = ->
   Session.set 'flipped', true
   elapsed = Date.now() - Session.get 'showTime'
@@ -21,36 +23,37 @@ flipCard = ->
 
 updateInterval = (scheduleId) ->
   schedule = Schedules.findOne _id: scheduleId
-  repetition = schedule.repetition + 1
-  interval = schedule.interval
-  if repetition == 1
-    interval = 1
-  else if repetition == 2
-    interval = 6
-  else
-    interval = Math.round(schedule.efactor * interval)
-  Schedules.update _id: schedule._id,
-    $set:
-      repetition: repetition
-      interval: interval
-      date: schedule.date + (interval * (3600 * 24))
+  if schedule
+    repetition = schedule.repetition + 1
+    interval = schedule.interval
+    if repetition == 1
+      interval = 1
+    else if repetition == 2
+      interval = 6
+    else
+      interval = Math.round(schedule.efactor * interval)
+    Schedules.update _id: schedule._id,
+      $set:
+        repetition: repetition
+        interval: interval
+        date: schedule.date + (interval * (3600 * 24))
 
 updateEfactor = (scheduleId, quality) ->
   schedule = Schedules.findOne _id: scheduleId
-  console.log quality
-  if quality < 3
-    Schedules.update _id: schedule._id,
-      $set:
-        repetition: 0
-        quality: quality
-  else
-    efactor = schedule.efactor + (0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02))
-    efactor = Math.max efactor, 1.3
-    Schedules.update _id: schedule._id,
-      $set:
-        efactor: efactor
-        quality: quality
-
+  if schedule
+    if quality < 3
+      Schedules.update _id: schedule._id,
+        $set:
+          repetition: 0
+          quality: quality
+    else
+      efactor = schedule.efactor + (0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02))
+      efactor = Math.max efactor, 1.3
+      Schedules.update _id: schedule._id,
+        $set:
+          efactor: efactor
+          quality: quality
+  
 Template.cards.rendered = ->
   $('.card').attr('unselectable','on').css('UserSelect','none').css('MozUserSelect','none')
   Meteor.autorun ->
@@ -97,6 +100,18 @@ Template.cards.bad = ->
 
 Template.cards.finished = ->
   false
+
+Template.cards.answer = ->
+  card = Template.cards.card()
+  if card
+    lang = Meteor.user().profile.lang
+    if card.back[lang]
+      return card.back[lang]
+    else
+      Meteor.call 'translate', {term: card.front, origin: card.lang, target: lang}, (err, res) ->
+        update = {}
+        update["back.#{lang}"] = res
+        Cards.update {_id: card._id}, $set: update
 
 Template.cards.events
   'click .card': (e) ->

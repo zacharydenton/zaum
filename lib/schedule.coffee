@@ -11,7 +11,6 @@ Meteor.methods
       data.quality = 5
       Schedules.insert data
   'createSchedules': (deckId, userId) ->
-    console.log deckId, userId
     deck = Decks.findOne _id: deckId
     for cardId in deck.cards
       Meteor.call 'createSchedule',
