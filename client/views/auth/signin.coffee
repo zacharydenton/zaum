@@ -15,3 +15,4 @@ Template.signin.rendered = ->
       pass = $('#signinPass').val()
       if email and pass
         Meteor.loginWithPassword email, pass
+        Meteor.Router.to '/decks'

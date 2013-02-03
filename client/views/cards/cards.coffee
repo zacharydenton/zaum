@@ -6,17 +6,17 @@ chooseNext = ->
 flipCard = ->
   Session.set 'flipped', true
   elapsed = Date.now() - Session.get 'showTime'
-  if elapsed < 1000
+  if elapsed < 500
     quality = 5
-  else if elapsed < 2000
+  else if elapsed < 1000
     quality = 4
-  else if elapsed < 5000
+  else if elapsed < 2000
     quality = 3
   else if elapsed < 10000
     quality = 2
   else
     quality = 1
-  updateEfactor Session.get 'currentSchedule', quality
+  updateEfactor Session.get('currentSchedule'), quality
   updateInterval Session.get 'currentSchedule'
 
 updateInterval = (scheduleId) ->
@@ -37,14 +37,19 @@ updateInterval = (scheduleId) ->
 
 updateEfactor = (scheduleId, quality) ->
   schedule = Schedules.findOne _id: scheduleId
+  console.log quality
   if quality < 3
     Schedules.update _id: schedule._id,
-      $set: repetition: 0
+      $set:
+        repetition: 0
+        quality: quality
   else
     efactor = schedule.efactor + (0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02))
     efactor = Math.max efactor, 1.3
     Schedules.update _id: schedule._id,
-      $set: efactor: efactor
+      $set:
+        efactor: efactor
+        quality: quality
 
 Template.cards.rendered = ->
   $('.card').attr('unselectable','on').css('UserSelect','none').css('MozUserSelect','none')
@@ -63,8 +68,35 @@ Template.cards.card = ->
 Template.cards.flipped = ->
   Session.get 'flipped'
 
+Template.cards.remaining = ->
+  Schedules.find(date: $lt: Math.round(Date.now() / 1000)).count()
+
+Template.cards.total = ->
+  Schedules.find().count()
+
+Template.cards.completed = ->
+  Template.cards.total() - Template.cards.remaining()
+
+Template.cards.good = ->
+  good = Schedules.find
+    date: $gt: Math.round(Date.now() / 1000)
+    quality: $gt: 3
+  Math.round(good.count() / Template.cards.total() * 100)
+
+Template.cards.okay = ->
+  okay = Schedules.find
+    date: $gt: Math.round(Date.now() / 1000)
+    quality: 3
+  Math.round(okay.count() / Template.cards.total() * 100)
+
+Template.cards.bad = ->
+  bad = Schedules.find
+    date: $gt: Math.round(Date.now() / 1000)
+    quality: $lt: 3
+  Math.round(bad.count() / Template.cards.total() * 100)
+
 Template.cards.events
-  'click': (e) ->
+  'click .card': (e) ->
     e.preventDefault()
     if Session.get 'flipped'
       chooseNext()

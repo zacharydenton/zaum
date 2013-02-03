@@ -8,6 +8,7 @@ Meteor.methods
       data.repetition = 0
       data.efactor = 2.5
       data.interval = 1
+      data.quality = 5
       Schedules.insert data
   'createSchedules': (deckId, userId) ->
     console.log deckId, userId

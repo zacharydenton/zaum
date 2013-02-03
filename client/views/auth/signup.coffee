@@ -32,4 +32,5 @@ Template.signup.rendered = ->
           password: pass
           profile:
             lang: lang
+        Meteor.Router.to '/decks'
 

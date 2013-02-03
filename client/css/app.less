@@ -43,15 +43,35 @@ select {
 }
 
 .card {
-  height: 400px;
-  padding: 0.8em;
+  padding: 80px 40px;
 	background-color: #fbfbfb;
-	line-height: 1.45em;
 	border: 1px solid #d8d8d8;
 	-webkit-box-shadow: rgba(0,0,0,0.06) 0 0 10px;
 	-moz-box-shadow: rgba(0,0,0,0.06) 0 0 10px;
 	box-shadow: rgba(0,0,0,0.06) 0 0 10px;
   text-align: center;
-  font-size: 48px;
   font-weight: bolder;
+  cursor: pointer;
+  margin-bottom: 20px;
+
+  .front {
+    font-size: 96px;
+    line-height: 96px;
+  }
+
+  .back {
+    font-size: 64px;
+    line-height: 64px;
+  }
+
 }
+
+.cardControls {
+  text-align: center;
+}
+
+hr.bright {
+  border-bottom: 2px solid white;
+  border-top: 1px solid #bec0c3;
+}
+
