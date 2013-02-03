@@ -11,7 +11,7 @@
         <div class="front">
           {{ card.front }}
         </div>
-        <div class="back">
+        <div class="back {{#unless flipped}}hide{{/unless}}">
           {{ card.back.en }}
         </div>
       </div>
