@@ -1,6 +1,118 @@
 <template name="body">
 <div class="outer-wrapper {{currentPage}}">
+  <a href="#" class="scrolltop">
+    <span>up</span>
+  </a>
+  <!-- begins navbar -->
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <a class="brand scroller" data-section="body" href="/">
+          <h1>Zaum</h1>
+        </a>
+        <div class="nav-collapse collapse">
+          <ul class="nav pull-right">
+            <li>
+            {{> signup}}
+            </li>
+            <li>
+            {{> signin}}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ends navbar -->
+
   {{{renderPage}}}
+
+  <!-- starts footer -->
+  <div id="footer">
+    <div class="container">
+      <div class="row">
+        <div class="span8">
+          <h3>From the Blog</h3>
+          <div class="blog_post">
+            <div class="row">
+              <div class="span2">
+                <a href="blog.html">
+                  <img src="img/pic_blog.png" alt="post image" class="img-circle" />
+                </a>
+              </div>
+              <div class="span4">
+                <a href="blog.html" class="title">
+                  Lorem Ipsum is simply dummy 
+                </a>
+                <div class="intro">
+                  There are many variations of passages of Lorem alteration in some form by injected look even slightly believable.
+                </div>
+                <div class="date">
+                  Oct 22. 2012
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="span4 contact_us">
+          <h3>Contact Us</h3>
+          <form class="form-horizontal">
+            <div class="field">
+              <div class="label_field">
+                <label for="inputName">Name</label>
+              </div>
+              <input type="text" id="inputName" />
+            </div>
+
+            <div class="field">
+              <div class="label_field">
+                <label for="inputEmail">Email</label>
+              </div>
+              <input type="text" id="inputEmail" />
+            </div>
+
+            <div class="field">
+              <div class="label_field">
+                <label for="inputCity">City</label>
+              </div>
+              <input type="text" id="inputCity" />
+            </div>
+
+            <div class="field">
+              <div class="label_field">
+                <label for="inputComment">Comments</label>
+              </div>
+              <textarea name="comments"></textarea>
+            </div>
+            <button type="submit" class="btn">Send</button>
+          </form>
+        </div>
+      </div>
+      <hr>
+      <div class="row copyright">
+        <div class="span5">
+          <h3>Social</h3>
+          <a href="#" class="social fb">
+            <i class="i_facebook"></i>
+          </a>
+          <a href="#" class="social tw">
+            <i class="i_twitter"></i>
+          </a>
+          <a href="#" class="social yt">
+            <i class="i_youtube"></i>
+          </a>
+        </div>
+        <div class="span2 offset5 copy">
+          <p>2012 - Measure Template</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 </template>
 
